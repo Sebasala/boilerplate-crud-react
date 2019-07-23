@@ -5,7 +5,7 @@ import Item from "./Item";
 const Items = props => {
     return (
         <ul className="Items">
-            {props.items.map(item => <Item title={item.title} description={item.description} /> )}
+            {props.items.map(item => <Item key={item.id} title={item.title} description={item.description} /> )}
         </ul>
     );
 };

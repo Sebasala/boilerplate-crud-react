@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Items from "./components/Items";
-import Input from "./components/Input";
+import Form from "./components/Form";
 
 class App extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Input value={this.state.input} onChange={this.handleChange} />
+        <Form input={this.state.input} inputChange={this.handleChange} />
         <Items items={this.state.items} />
       </div>
     );

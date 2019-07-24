@@ -8,21 +8,12 @@ class App extends Component {
 
     this.state = {
       input: "",
-      items: [
-        {
-          id: 1,
-          title: "Item 1",
-          description: "Description item 1"
-        },
-        {
-          id: 2,
-          title: "Item 2",
-          description: "Description item 2"
-        }
-      ]
+      submit: "",
+      items: []
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -31,10 +22,35 @@ class App extends Component {
     })
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+
+    function isItemIdIn(id, arr) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].id === id) {
+          return true;
+        }
+      }
+      return false;
+    }
+    
+    let itemId = 0;
+
+    while (isItemIdIn(itemId, this.state.items)) {
+      itemId += 1;
+    }
+
+    this.setState({
+      input: "",
+      items: [...this.state.items, {id: itemId, title: this.state.input, description: "Description"}]
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <Form input={this.state.input} inputChange={this.handleChange} />
+        <Form input={this.state.input} inputChange={this.handleChange} onSubmit={this.handleSubmit} />
+        <h1>{this.state.submit}</h1>
         <Items items={this.state.items} />
       </div>
     );

@@ -8,21 +8,17 @@ class App extends Component {
 
     this.state = {
       input: "",
-      submit: "",
       items: []
     }
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({
       input: event.target.value
     })
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     function isItemIdIn(id, arr) {
@@ -42,7 +38,13 @@ class App extends Component {
 
     this.setState({
       input: "",
-      items: [...this.state.items, {id: itemId, title: this.state.input, description: "Description"}]
+      items: [...this.state.items, 
+                {
+                  id: itemId, 
+                  title: this.state.input, 
+                  description: "Description"
+                }
+              ]
     })
   }
 
@@ -50,7 +52,6 @@ class App extends Component {
     return (
       <div className="App">
         <Form input={this.state.input} inputChange={this.handleChange} onSubmit={this.handleSubmit} />
-        <h1>{this.state.submit}</h1>
         <Items items={this.state.items} />
       </div>
     );

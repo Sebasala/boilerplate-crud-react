@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+
+//Components
 import Items from "./components/Items";
 import Form from "./components/Form";
+
+//Functions
+import availableId from "./functions/availableId";
 
 class App extends Component {
   constructor(props) {
@@ -8,50 +13,54 @@ class App extends Component {
 
     this.state = {
       input: "",
+      textarea: "",
       items: []
     }
   }
 
-  handleChange = (event) => {
+  handleInputChange = (event) => {
     this.setState({
       input: event.target.value
     })
   }
 
+  handleTextareaChange = (event) => {
+    this.setState({
+      textarea: event.target.value
+    })
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
-
-    function isItemIdIn(id, arr) {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].id === id) {
-          return true;
-        }
-      }
-      return false;
-    }
     
-    let itemId = 0;
+    let itemId = availableId(this.state.items);
 
-    while (isItemIdIn(itemId, this.state.items)) {
-      itemId += 1;
+    if (this.state.input.length > 0) {
+      this.setState({
+        input: "",
+        textarea: "",
+        items: [
+          ...this.state.items, 
+          {
+            id: itemId, 
+            title: this.state.input, 
+            description: this.state.textarea
+          }
+        ]
+      })
     }
-
-    this.setState({
-      input: "",
-      items: [...this.state.items, 
-                {
-                  id: itemId, 
-                  title: this.state.input, 
-                  description: "Description"
-                }
-              ]
-    })
   }
 
   render() {
     return (
       <div className="App">
-        <Form input={this.state.input} inputChange={this.handleChange} onSubmit={this.handleSubmit} />
+        <Form 
+          input={this.state.input} 
+          inputChange={this.handleInputChange} 
+          textarea={this.state.textarea} 
+          textareaChange={this.handleTextareaChange} 
+          onSubmit={this.handleSubmit} 
+        />
         <Items items={this.state.items} />
       </div>
     );

@@ -1,28 +1,46 @@
-/* GENERAL */
+// GENERAL
 * {
 	box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p,
+.buttons {
+	max-width: $max-width-1;
+	padding: 0 2 * $blh;
 	margin-bottom: 2 * $blh;
+}
+
+img {
+	object-fit: cover;
+	object-position: center;
+	display: block;
+	max-width: 100%;
+	margin: 0 auto 2 * $blh;
 }
 
 li {
 	list-style-type: none;
-	padding: 2 * $blh 2 * $blh 0;
-	margin-bottom: 2 * $blh;
 }
 
-input {
-	display: block;
-	height: 2 * $blh;
-	width: 100%;
-	max-width: 320px;
-	border: 1px solid $light-gray;
-	margin-bottom: 2 * $blh;
-}
-
+// FORMS
 form {
 	padding: 2 * $blh 2 * $blh 0;
 	margin-bottom: 2 * $blh;
+
+	input,
+	textarea {
+		display: block;
+		width: 100%;
+		max-width: $max-width-1;
+		border: 1px solid $light-gray;
+		margin-bottom: 2 * $blh;
+	}
+
+	input {
+		height: 2 * $blh;
+	}
+
+	textarea {
+		height: 6 * $blh;
+	}
 }

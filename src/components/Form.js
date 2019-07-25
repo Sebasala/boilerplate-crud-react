@@ -5,7 +5,8 @@ const Form = props => {
     return (
         <form onSubmit={props.onSubmit}>
             <input value={props.input} onChange={props.inputChange} />
-            <button type="submit">Submit</button>
+            <textarea name="textarea" id="textarea" rows="10" onChange={props.textareaChange} value={props.textarea}></textarea>
+            <button type="submit">Crear</button>
         </form>
     );
 };
